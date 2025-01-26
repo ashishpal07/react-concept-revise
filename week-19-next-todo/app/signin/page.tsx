@@ -38,6 +38,11 @@ function Signin() {
 export default Signin;
 
 // (auth) -> create folder like this it will didnt consider this as the route will just skip this take its insede jsx || its inside foler as route part
-// [id] -> create folder like this basically this is dynamic field
-// eg: basically /api/v1/users/:id -> like here is id dynamic
-// [...params] -> basically this will take list of params api/v1/users/:id/:slug => ["id", "slug"]
+// [id] -> create folder like this basically this is dynamic field.
+// eg: basically /api/v1/users/:id -> like here is id dynamic.
+// [...params] -> basically this will take list of params api/v1/users/:id/:slug => ["id", "slug"].
+
+// ssr => server side rendering [component server side rendering is seo optimised].
+// csr => client side rendering [client side component render server side but hydrate on client side].
+
+// hydration => basically dont use any variables values like timestamps and all.
