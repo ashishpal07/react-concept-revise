@@ -13,9 +13,9 @@ function SignUp() {
 
   async function signupHandler() {
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/signup", user);
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      const res = await axios.post("http://localhost:4000/api/v1/users/signup", user);
+      // localStorage.setItem("token", res.data.token);
+      navigate("/login");
     } catch (error) {
       console.log("error while sign up user");
       return error;
@@ -54,10 +54,10 @@ function SignUp() {
               onChange={(e) => {
                 setUser({
                   ...user,
-                  email: e.target.value,
+                  username: e.target.value,
                 });
               }}
-              label={"Email"}
+              label={"Username"}
               placeholder={"user@example.com"}
             />
             <InputBox

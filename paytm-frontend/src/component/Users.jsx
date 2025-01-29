@@ -3,17 +3,22 @@ import User from "./User";
 import axios from "axios";
 
 function Users() {
-  const [users, setusers] = useState([{}]);
+  const [users, setusers] = useState(null);
   const [filter, setFilter] = useState("");
 
   async function getuserByFilter() {
-    const res = await axios.get(`http://localhost:5000/api/v1/users/bulk?filter=${filter}`);
+    const res = await axios.get(`http://localhost:4000/api/v1/users/bulk?filter=${filter}`);
     setusers([...res.data.users]);
   }
 
   useEffect(() => {
-    getuserByFilter();
+    let id = setTimeout(() => {
+      getuserByFilter();
+    }, 200);
+
+    return () => {if (id) clearTimeout(id)}
   }, [filter]);
+
 
   return (
     <div className="p-2">
@@ -27,8 +32,8 @@ function Users() {
         />
       </div>
       <div>
-        {users.map((user) => {
-          return <User key={user.id} user={user} />
+        {users !== null && users.map((user) => {
+          return <User key={user?.id} user={user} />
         })}
       </div>
     </div>

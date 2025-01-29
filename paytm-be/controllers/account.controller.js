@@ -1,5 +1,4 @@
 import { Account } from "../models/account.model.js";
-import { z } from "zod";
 
 export async function getBalance(req, res) {
   try {

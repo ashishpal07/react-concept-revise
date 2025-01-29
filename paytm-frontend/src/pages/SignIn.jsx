@@ -13,9 +13,12 @@ function SignIn() {
 
   async function signinHandler() {
     try {
+      console.log(login);
+      
       const res = await axios.post(
-        "http://localhost:5000/api/v1/signin",
-        login
+        "http://localhost:4000/api/v1/users/signin",
+        login,
+        { withCredentials: true }
       );
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
@@ -34,8 +37,8 @@ function SignIn() {
             <SubHeading label={"Enter your information to create an account"} />
 
             <InputBox
-              onChange={(e) => setLogin({ ...login, email: e.target.value })}
-              label={"Email"}
+              onChange={(e) => setLogin({ ...login, username: e.target.value })}
+              label={"Username"}
               placeholder={"user@example.com"}
             />
             <InputBox
