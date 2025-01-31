@@ -31,18 +31,21 @@ export async function register(req, res) {
       balance: 1 + Math.random() * 10000,
     });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
-
-    res.cookie('jwt',token, { httpOnly: true, secure: true, maxAge: 86400000 })
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
     return res
       .status(201)
-      .json({ message: "User created successfully.", user: user._id, token });
+      .cookie("token", token, {
+        httpOnly: true,
+        maxAge: 15 * 60 * 1000,
+        sameSite:process.env.NODE_ENV==="development"?"lax":"none",
+        secure:process.env.NODE_ENV==="development"?false:true,
+      })
+      .json({
+        message: "User created successfully.",
+        user: user._id,
+      });
   } catch (error) {
-    console.log(error);
-
     return res
       .status(500)
       .json({ message: "something went wrong while registering user." });
@@ -73,12 +76,17 @@ export async function login(req, res) {
       expiresIn: "1d",
     });
 
-    const payload = { httpOnly: true, secure: false, maxAge: 86400000, sameSite:'None' };
-    res.cookie('jwt', token, payload);
-
     return res
-      .status(201)
-      .json({ message: "User Logged in successfully.", token });
+      .status(200)
+      .cookie("token", token, {
+        httpOnly: true,
+        maxAge: 15 * 60 * 1000,
+        sameSite:process.env.NODE_ENV==="development"?"lax":"none",
+        secure:process.env.NODE_ENV==="development"?false:true,
+      })
+      .json({
+        message: "User created successfully."
+      });
   } catch (error) {
     return res
       .status(500)
