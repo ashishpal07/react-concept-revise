@@ -6,12 +6,12 @@ import Users from "../component/Users";
 function Dashboard() {
   const [token, setToken] = useState();
 
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    // if (token === null || token.length == 0) {
+  // useEffect(() => {
+  //   setToken(localStorage.getItem("token"));
+  //   // if (token === null || token.length == 0) {
       
-    // } 
-  }, []);
+  //   // } 
+  // }, []);
 
   return (
     <div className="flex flex-col gap-y-3">

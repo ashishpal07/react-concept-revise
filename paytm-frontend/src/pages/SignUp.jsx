@@ -15,7 +15,9 @@ function SignUp() {
     try {
       const res = await axios.post("http://localhost:4000/api/v1/users/signup", user);
       // localStorage.setItem("token", res.data.token);
-      navigate("/login");
+      console.log(res.data);
+      
+      navigate("/signin");
     } catch (error) {
       console.log("error while sign up user");
       return error;
